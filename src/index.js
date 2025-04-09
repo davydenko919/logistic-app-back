@@ -5,11 +5,13 @@ const PORT = 3000;
 
 const app = express();
 
-app.use(PinoHttp({
-  transport:{
-    target: "pino-pretty"
-  }
-}))
+app.use(
+  PinoHttp({
+    transport: {
+      target: 'pino-pretty',
+    },
+  }),
+);
 
 app.get('/', (req, res) => {
   // тіло функції-обробника
