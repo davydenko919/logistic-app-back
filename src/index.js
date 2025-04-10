@@ -14,9 +14,16 @@ app.use(
 );
 
 app.get('/', (req, res) => {
-  // тіло функції-обробника
+  res.send('Hello, Express');
 });
 
+app.get('/movies', (req, res) => {
+  res.send('Movies');
+});
+
+app.get('/books', (req, res) => {
+  res.send('Books');
+});
 app.listen(PORT, () => {
   console.log(`Server is running on ${PORT}`);
 });
