@@ -1,10 +1,10 @@
 import mongoose from 'mongoose';
-// import {
-//     MONGODB_USER,
-//     MONGODB_PASSWORD,
-//     MONGODB_URL,
-//     MONGODB_DB,
-//   } from '../utils/env.js';
+import {
+    MONGODB_USER,
+    MONGODB_PASSWORD,
+    MONGODB_URL,
+    MONGODB_DB,
+  } from '../utils/env.js';
 
 const DB_URI = `mongodb+srv://${MONGODB_USER}:${MONGODB_PASSWORD}@${MONGODB_URL}/${MONGODB_DB}?retryWrites=true&w=majority`;
 
