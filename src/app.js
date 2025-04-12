@@ -1,6 +1,6 @@
 import express from 'express';
 
-import tripRoutes from './routes/tripRoutes.js';
+import tripRoutes from './routes/tripsRoutes.js';
 
 import { errorHandler } from './middlewares/errorHandler.js';
 import { notFoundHandler } from './middlewares/notFoundHandler.js';

@@ -5,7 +5,7 @@ import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 import {
     getTripsController,
     getTripController,
-} from '../controllers/students.js';
+} from '../controllers/tripsControllers.js';
 
 const router = express.Router();
 

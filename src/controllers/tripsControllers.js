@@ -1,9 +1,9 @@
 import createHttpError from 'http-errors';
 
-import { getStudents, getStudent } from '../services/students.js';
+import { getTrips, getTrip } from '../services/tripsServices.js';
 
-export async function getStudentsController(req, res) {
-  const students = await getStudents();
+export async function getTripsController(req, res) {
+  const students = await getTrips();
 
   res.json({
     status: 200,
@@ -12,20 +12,20 @@ export async function getStudentsController(req, res) {
   });
 }
 
-export async function getStudentController(req, res, next) {
+export async function getTripController(req, res, next) {
   const { id } = req.params;
 
-  const student = await getStudent(id);
+  const trip = await getTrip(id);
 
-  if (student === null) {
-    // throw createHttpError(404, "Student not found");
-    // throw createHttpError[404]("Student not found");
-    return next(new createHttpError.NotFound('Student not found:('));
+  if (trip === null) {
+    // throw createHttpError(404, "Trip not found");
+    // throw createHttpError[404]("Trip not found");
+    return next(new createHttpError.NotFound('Trip not found:('));
   }
 
   res.json({
     status: 200,
     message: 'Student received successfully',
-    data: student,
+    data: trip,
   });
 }
