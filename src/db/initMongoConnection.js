@@ -16,7 +16,7 @@ async function initMongoConnection(){
         console.log("Mongo connection successfully established!");
     }
     catch(error){
-            console.error(error);
+            console.error("Database connecton error");
             throw error;
     }
 };

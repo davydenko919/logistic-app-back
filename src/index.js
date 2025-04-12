@@ -8,18 +8,7 @@ const PORT = 3000;
 
 const app = express();
 
-async function bootstrap() {
-  try {
-    await initMongoConnection();
-    app.listen(PORT, () => {
-      console.log(`Server is running on ${PORT}`);
-    });
-  } catch (error) {
-    console.error(error);
-  }
-}
 
-bootstrap();
 
 app.use(cors());
 
@@ -43,6 +32,8 @@ app.get('/trips', async (req, res) => {
   }
 });
 
-app.get('/books', (req, res) => {
-  res.send('Books');
-});
+import { errorHandler } from './middlewares/errorHandler.js';
+import { notFoundHandler } from './middlewares/notFoundHandler.js';
+
+app.use(notFoundHandler);
+app.use(errorHandler);
