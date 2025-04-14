@@ -27,3 +27,7 @@ export async function getTripController(req, res, next) {
     data: trip,
   });
 }
+
+export async function createTripController(req, res) {
+  res.send("Create user");
+}
