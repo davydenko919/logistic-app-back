@@ -14,6 +14,6 @@ router.get('/', ctrlWrapper(getTripsController));
 
 router.get('/:id', ctrlWrapper(getTripController));
 
-router.post('/:id', ctrlWrapper(createTripController));
+router.post('/', ctrlWrapper(createTripController));
 
 export default router;
