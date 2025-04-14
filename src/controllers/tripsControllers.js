@@ -18,8 +18,6 @@ export async function getTripController(req, res, next) {
   const trip = await getTrip(id);
 
   if (trip === null) {
-    // throw createHttpError(404, "Trip not found");
-    // throw createHttpError[404]("Trip not found");
     return next(new createHttpError.NotFound('Trip not found:('));
   }
 
