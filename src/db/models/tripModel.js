@@ -17,7 +17,7 @@ const tripSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
-    elengthTrip: {
+    lengthTrip: {
         type: Number,
         required: true,
     },
@@ -29,10 +29,10 @@ const tripSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    userId: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-      },
+    // userId: {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     required: true,
+    //   },
 
 },
 {
@@ -40,5 +40,5 @@ const tripSchema = new mongoose.Schema({
 }
 );
 
-const TripModel = mongoose.model("TripModel", tripSchema);
-export {TripModel};
+const Trip = mongoose.model("Trip", tripSchema);
+export {Trip};

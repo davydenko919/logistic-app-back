@@ -7,6 +7,8 @@ import { notFoundHandler } from './middlewares/notFoundHandler.js';
 
 const app = express();
 
+
+
 app.use('/trips', tripRoutes);
 
 app.use(notFoundHandler);

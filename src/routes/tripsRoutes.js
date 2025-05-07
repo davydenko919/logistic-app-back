@@ -9,11 +9,12 @@ import {
 } from '../controllers/tripsControllers.js';
 
 const router = express.Router();
+const jsonParser =express.json();
 
 router.get('/', ctrlWrapper(getTripsController));
 
 router.get('/:id', ctrlWrapper(getTripController));
 
-router.post('/', ctrlWrapper(createTripController));
+router.post('/', jsonParser, ctrlWrapper(createTripController));
 
 export default router;

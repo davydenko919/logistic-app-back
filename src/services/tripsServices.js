@@ -1,9 +1,14 @@
-import { TripModel } from '../db/models/TripModel.js';
+import { Trip } from '../db/models/TripModel.js';
 
 export function getTrips() {
-  return TripModel.find();
+  return Trip.find();
 }
 
-export function getTrip(studentId) {
-  return TripModel.findById(studentId);
+export function getTrip(tripId) {
+  return Trip.findById(tripId);
 }
+
+export function createTrip(trip) {
+  return Trip.create(trip);
+}
+
