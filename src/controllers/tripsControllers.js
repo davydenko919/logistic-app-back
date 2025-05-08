@@ -8,13 +8,18 @@ import {
   updateTrip,
 } from '../services/tripsServices.js';
 
-import {parsePaginationParams} from '../utils/parsePaginationParams.js'
+import {parsePaginationParams} from '../utils/parsePaginationParams.js';
+import {parseSortParams} from '../utils/parseSortParams.js';
 
 export async function getTripsController(req, res) {
-  const {page, perPage} = parsePaginationParams(req.querry);
+  const {page, perPage} = parsePaginationParams(req.query);
+  const { sortBy, sortOrder } = parseSortParams(req.query);
+
   const trips = await getTrips({
     page,
-    perPage
+    perPage,
+    sortBy,
+    sortOrder,
   });
 
   res.json({

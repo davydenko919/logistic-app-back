@@ -1,10 +1,29 @@
 import { Trip } from '../db/models/TripModel.js';
 
-export function getTrips({page, perPage}) {
+export async function getTrips({page, perPage, sortBy, sortOrder}) {
   const skip = page > 0 ? (page - 1) * perPage : 0;
 
- 
-  return Trip.find().skip(skip);
+  const tripQuery = Trip.find();
+
+  const [total, trips] = await Promise.all([
+    Trip.countDocuments(tripQuery),
+    tripQuery
+      .sort({ [sortBy]: sortOrder })
+      .skip(skip)
+      .limit(perPage),
+  ]);
+
+  const totalPages = Math.ceil(total / perPage);
+
+  return {
+    trips,
+    page,
+    perPage,
+    totalItems: total,
+    hasNextPage: totalPages - page > 0,
+    hasPreviousPage: page > 1,
+  };
+
 }
 
 export function getTrip(tripId) {
