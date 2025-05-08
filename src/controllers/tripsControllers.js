@@ -9,12 +9,13 @@ import {
 } from '../services/tripsServices.js';
 
 export async function getTripsController(req, res) {
-  const students = await getTrips();
+  console.log(req.query);
+  const trips = await getTrips();
 
   res.json({
     status: 200,
     message: 'Trip received successfully',
-    data: students,
+    data: trips,
   });
 }
 
