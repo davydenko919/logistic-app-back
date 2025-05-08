@@ -12,3 +12,10 @@ export function createTrip(trip) {
   return Trip.create(trip);
 }
 
+export function deleteTrip(tripId) {
+  return Trip.findByIdAndDelete(tripId);
+}
+
+export function updateTrip(tripId, trip) {
+  return Trip.findByIdAndUpdate(tripId, trip);
+}

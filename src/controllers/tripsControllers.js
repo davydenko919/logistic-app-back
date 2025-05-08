@@ -1,6 +1,12 @@
 import createHttpError from 'http-errors';
 
-import { getTrips, getTrip, createTrip } from '../services/tripsServices.js';
+import {
+  getTrips,
+  getTrip,
+  createTrip,
+  deleteTrip,
+  updateTrip,
+} from '../services/tripsServices.js';
 
 export async function getTripsController(req, res) {
   const students = await getTrips();
@@ -23,7 +29,7 @@ export async function getTripController(req, res, next) {
 
   res.json({
     status: 200,
-    message: 'Student received successfully',
+    message: 'Trip received successfully',
     data: trip,
   });
 }
@@ -42,5 +48,50 @@ export async function createTripController(req, res) {
   const result = await createTrip(trip);
 
   console.log(result);
-  res.send("Trip was created");
+  res
+    .status(201)
+    .json({ status: 201, message: 'Student created!', data: result });
+}
+
+export async function deleteTripController(req, res, next) {
+  const { id } = req.params;
+
+  const result = await deleteTrip(id);
+
+  if (result === null) {
+    return next(new createHttpError.NotFound('Trip not found:('));
+  }
+
+  res.json({
+    status: 200,
+    message: 'Trip deleted successfully',
+    data: result,
+  });
+}
+
+
+export async function updateTripController(req, res, next) {
+  const { id } = req.params;
+
+  const trip = {
+    name: req.body.name,
+    date: req.body.date,
+    truckTrip: req.body.truckTrip,
+    startTrip: req.body.startTrip,
+    endTrip: req.body.endTrip,
+    lengthTrip: req.body.lengthTrip,
+    weigth: req.body.weigth,
+    product: req.body.product,
+  };
+  const result = await updateTrip(id, trip);
+
+  if (result === null) {
+    return next(new createHttpError.NotFound('Trip not found:('));
+  }
+
+
+  console.log(result);
+  res
+    .status(201)
+    .json({ status: 201, message: 'Student updated!', data: result });
 }
