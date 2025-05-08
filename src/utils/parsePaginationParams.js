@@ -16,7 +16,7 @@ function parseNumber(value, defaultValue) {
     const { page, perPage } = query;
 
     const parsedPage = parseNumber(page, 1);
-    const parsedPerPage = parseNumber(perPage, 10);
+    const parsedPerPage = parseNumber(perPage, 20);
 
     return {
       page: parsedPage,

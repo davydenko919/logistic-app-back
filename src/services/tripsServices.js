@@ -1,7 +1,10 @@
 import { Trip } from '../db/models/TripModel.js';
 
-export function getTrips() {
-  return Trip.find();
+export function getTrips({page, perPage}) {
+  const skip = page > 0 ? (page - 1) * perPage : 0;
+
+ 
+  return Trip.find().skip(skip);
 }
 
 export function getTrip(tripId) {

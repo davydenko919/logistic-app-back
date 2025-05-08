@@ -8,9 +8,14 @@ import {
   updateTrip,
 } from '../services/tripsServices.js';
 
+import {parsePaginationParams} from '../utils/parsePaginationParams.js'
+
 export async function getTripsController(req, res) {
-  console.log(req.query);
-  const trips = await getTrips();
+  const {page, perPage} = parsePaginationParams(req.querry);
+  const trips = await getTrips({
+    page,
+    perPage
+  });
 
   res.json({
     status: 200,
