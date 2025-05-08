@@ -19,7 +19,7 @@ function parseNumber(value) {
     const parsedEndDate = parseNumber(endDate);
 
     return {
-      minAge: parsedMinAge,
-      maxAge: parsedMaxAge,
+      minAge: parsedStartDate,
+      maxAge: parsedEndDate,
     };
   }

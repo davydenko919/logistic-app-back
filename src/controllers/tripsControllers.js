@@ -15,16 +15,20 @@ export async function getTripsController(req, res) {
   const {page, perPage} = parsePaginationParams(req.query);
   const { sortBy, sortOrder } = parseSortParams(req.query);
 
+  const { startDate, endDate } = req.query;
+
   const trips = await getTrips({
     page,
     perPage,
     sortBy,
     sortOrder,
+    startDate,
+    endDate,
   });
 
   res.json({
     status: 200,
-    message: 'Trip received successfully',
+    message: 'here is the array trps',
     data: trips,
   });
 }
