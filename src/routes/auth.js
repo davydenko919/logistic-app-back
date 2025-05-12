@@ -2,7 +2,12 @@ import express from 'express';
 
 import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 
-import { registerController, loginController } from '../controllers/authControllers.js';
+import {
+  registerController,
+  loginController,
+  logoutController,
+  refreshController,
+} from '../controllers/authControllers.js';
 
 import { validateBody } from '../middlewares/validateBody.js';
 
@@ -24,5 +29,9 @@ authRoutes.post(
   validateBody(loginSchema),
   ctrlWrapper(loginController),
 );
+
+authRoutes.post('/logout', ctrlWrapper(logoutController));
+
+authRoutes.post('/refresh', ctrlWrapper(refreshController));
 
 export default authRoutes;
