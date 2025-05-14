@@ -8,11 +8,11 @@ import {
   updateTrip,
 } from '../services/tripsServices.js';
 
-import {parsePaginationParams} from '../utils/parsePaginationParams.js';
-import {parseSortParams} from '../utils/parseSortParams.js';
+import { parsePaginationParams } from '../utils/parsePaginationParams.js';
+import { parseSortParams } from '../utils/parseSortParams.js';
 
 export async function getTripsController(req, res) {
-  const {page, perPage} = parsePaginationParams(req.query);
+  const { page, perPage } = parsePaginationParams(req.query);
   const { sortBy, sortOrder } = parseSortParams(req.query);
 
   const { startDate, endDate } = req.query;
@@ -28,7 +28,29 @@ export async function getTripsController(req, res) {
     driverId: req.user.id,
   });
 
+  res.json({
+    status: 200,
+    message: 'here is the array trps',
+    data: trips,
+  });
+}
 
+export async function getAdminTripController(req, res) {
+  const { page, perPage } = parsePaginationParams(req.query);
+  const { sortBy, sortOrder } = parseSortParams(req.query);
+
+  const { startDate, endDate } = req.query;
+  // const dasId = req.user.id;
+  // console.log(dasId);
+  const trips = await getTrips({
+    page,
+    perPage,
+    sortBy,
+    sortOrder,
+    startDate,
+    endDate,
+    driverId: req.user.id,
+  });
 
   res.json({
     status: 200,
@@ -39,9 +61,8 @@ export async function getTripsController(req, res) {
 
 export async function getTripController(req, res, next) {
   const { id } = req.params;
-console.log(id);
-// console.log(req.user.id);
-
+  console.log(id);
+  // console.log(req.user.id);
 
   const trip = await getTrip(id);
   console.log(trip);
@@ -50,10 +71,26 @@ console.log(id);
     return next(new createHttpError.NotFound('Trip not found:('));
   }
 
-console.log(trip.driverId.toString() !== req.user.id.toString());
+  console.log(trip.driverId.toString() !== req.user.id.toString());
 
+  if (trip.driverId.toString() !== req.user.id.toString()) {
+    return next(new createHttpError.NotFound('Trip not found:('));
+  }
 
-if (trip.driverId.toString() !== req.user.id.toString()) {
+  res.json({
+    status: 200,
+    message: 'Trip received successfully',
+    data: trip,
+  });
+}
+
+export async function getAdminTripController(req, res, next) {
+  const { id } = req.params;
+
+  const trip = await getTrip(id);
+  console.log(trip);
+
+  if (trip === null) {
     return next(new createHttpError.NotFound('Trip not found:('));
   }
 
@@ -65,8 +102,6 @@ if (trip.driverId.toString() !== req.user.id.toString()) {
 }
 
 export async function createTripController(req, res) {
-
-
   const trip = {
     name: req.body.name,
     date: req.body.date,
@@ -102,7 +137,6 @@ export async function deleteTripController(req, res, next) {
   });
 }
 
-
 export async function updateTripController(req, res, next) {
   const { id } = req.params;
 
@@ -121,7 +155,6 @@ export async function updateTripController(req, res, next) {
   if (result === null) {
     return next(new createHttpError.NotFound('Trip not found:('));
   }
-
 
   console.log(result);
   res
