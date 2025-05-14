@@ -29,10 +29,10 @@ const tripSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    // userId: {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     required: true,
-    //   },
+    driverId: {
+        type: mongoose.Schema.Types.ObjectId,
+        // required: true,
+      },
 
 },
 {

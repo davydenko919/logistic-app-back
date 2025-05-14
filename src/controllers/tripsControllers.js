@@ -16,7 +16,8 @@ export async function getTripsController(req, res) {
   const { sortBy, sortOrder } = parseSortParams(req.query);
 
   const { startDate, endDate } = req.query;
-
+  // const dasId = req.user.id;
+  // console.log(dasId);
   const trips = await getTrips({
     page,
     perPage,
@@ -24,7 +25,10 @@ export async function getTripsController(req, res) {
     sortOrder,
     startDate,
     endDate,
+    driverId: req.user.id,
   });
+
+
 
   res.json({
     status: 200,
@@ -35,10 +39,21 @@ export async function getTripsController(req, res) {
 
 export async function getTripController(req, res, next) {
   const { id } = req.params;
+console.log(id);
+// console.log(req.user.id);
+
 
   const trip = await getTrip(id);
+  console.log(trip);
 
   if (trip === null) {
+    return next(new createHttpError.NotFound('Trip not found:('));
+  }
+
+console.log(trip.driverId.toString() !== req.user.id.toString());
+
+
+if (trip.driverId.toString() !== req.user.id.toString()) {
     return next(new createHttpError.NotFound('Trip not found:('));
   }
 
@@ -50,6 +65,8 @@ export async function getTripController(req, res, next) {
 }
 
 export async function createTripController(req, res) {
+
+
   const trip = {
     name: req.body.name,
     date: req.body.date,
@@ -59,6 +76,7 @@ export async function createTripController(req, res) {
     lengthTrip: req.body.lengthTrip,
     weigth: req.body.weigth,
     product: req.body.product,
+    driverId: req.user.id,
   };
   const result = await createTrip(trip);
 

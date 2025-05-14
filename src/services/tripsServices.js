@@ -1,6 +1,14 @@
-import { Trip } from '../db/models/TripModel.js';
+import { Trip } from '../db/models/tripModel.js';
 
-export async function getTrips({ page, perPage, sortBy, sortOrder, startDate, endDate }) {
+export async function getTrips({
+  page,
+  perPage,
+  sortBy,
+  sortOrder,
+  startDate,
+  endDate,
+  driverId,
+}) {
   const skip = page > 0 ? (page - 1) * perPage : 0;
 
   const query = {};
@@ -15,6 +23,13 @@ export async function getTrips({ page, perPage, sortBy, sortOrder, startDate, en
     if (endDate) {
       query.date.$lte = `${endDate}T23:59:59`;
     }
+  }
+
+// console.log(driverId);
+
+
+  if (driverId) {
+    query.driverId = driverId;
   }
 
   const tripQuery = Trip.find(query);
@@ -39,8 +54,8 @@ export async function getTrips({ page, perPage, sortBy, sortOrder, startDate, en
   };
 }
 
-export function getTrip(tripId) {
-  return Trip.findById(tripId);
+export function getTrip(id) {
+  return Trip.findById(id);
 }
 
 export function createTrip(trip) {
@@ -54,5 +69,3 @@ export function deleteTrip(tripId) {
 export function updateTrip(tripId, trip) {
   return Trip.findByIdAndUpdate(tripId, trip);
 }
-
-

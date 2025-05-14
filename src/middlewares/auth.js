@@ -33,6 +33,7 @@ export async function auth(req, res, next) {
   }
 
   req.user = { id: user._id, name: user.name };
+// console.log(req.user);
 
   next();
 }
