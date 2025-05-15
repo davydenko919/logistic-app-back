@@ -5,22 +5,21 @@ import {isValidID} from "../middlewares/isValidID.js";
 
 
 import {
-    getTripsController,
+    getAdminTripsController,
     getAdminTripController,
-    deleteTripController,
-    updateTripController,
-} from '../controllers/tripsControllers.js';
+    deleteAdminTripController,
+    updateAdminTripController,
+} from '../controllers/AdminTripsControllers.js';
 
 const router = express.Router();
 const jsonParser =express.json();
 
-router.get('/', ctrlWrapper(getTripsController));
+router.get('/', ctrlWrapper(getAdminTripsController));
 
 router.get('/:id', isValidID, ctrlWrapper(getAdminTripController));
 
+router.delete('/:id', isValidID, ctrlWrapper(deleteAdminTripController));
 
-router.delete('/:id', isValidID, ctrlWrapper(deleteTripController));
-
-router.put('/:id', isValidID, jsonParser, ctrlWrapper(updateTripController));
+router.put('/:id', isValidID, jsonParser, ctrlWrapper(updateAdminTripController));
 
 export default router;
