@@ -2,6 +2,7 @@ import express from 'express';
 
 import tripRoutes from './routes/tripsRoutes.js';
 import adminTrips from './routes/adminTrips.js';
+import usersRoutes from './routes/usersRoutes.js';
 
 import cookieParser from 'cookie-parser';
 
@@ -17,7 +18,8 @@ app.use(cookieParser());
 
 app.use('/auth', authRoutes);
 app.use('/trips', auth, tripRoutes);
-app.use('/admintrips', adminTrips);
+app.use('/admintrips', auth, adminTrips);
+app.use('/users', usersRoutes);
 
 app.use(notFoundHandler);
 app.use(errorHandler);

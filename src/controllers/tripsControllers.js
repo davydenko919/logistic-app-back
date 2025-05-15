@@ -6,7 +6,7 @@ import {
   createTrip,
   deleteTrip,
   updateTrip,
-} from '../services/tripsServices.js';
+} from '../services/adminTripsServices.js';
 
 import { parsePaginationParams } from '../utils/parsePaginationParams.js';
 import { parseSortParams } from '../utils/parseSortParams.js';
@@ -16,8 +16,7 @@ export async function getTripsController(req, res) {
   const { sortBy, sortOrder } = parseSortParams(req.query);
 
   const { startDate, endDate } = req.query;
-  // const dasId = req.user.id;
-  // console.log(dasId);
+
   const trips = await getTrips({
     page,
     perPage,
@@ -30,39 +29,16 @@ export async function getTripsController(req, res) {
 
   res.json({
     status: 200,
-    message: 'here is the array trps',
+    message: 'here is the array trіps',
     data: trips,
   });
 }
 
-export async function getAdminTripController(req, res) {
-  const { page, perPage } = parsePaginationParams(req.query);
-  const { sortBy, sortOrder } = parseSortParams(req.query);
-
-  const { startDate, endDate } = req.query;
-  // const dasId = req.user.id;
-  // console.log(dasId);
-  const trips = await getTrips({
-    page,
-    perPage,
-    sortBy,
-    sortOrder,
-    startDate,
-    endDate,
-    driverId: req.user.id,
-  });
-
-  res.json({
-    status: 200,
-    message: 'here is the array trps',
-    data: trips,
-  });
-}
 
 export async function getTripController(req, res, next) {
   const { id } = req.params;
   console.log(id);
-  // console.log(req.user.id);
+
 
   const trip = await getTrip(id);
   console.log(trip);
@@ -84,24 +60,13 @@ export async function getTripController(req, res, next) {
   });
 }
 
-export async function getAdminTripController(req, res, next) {
-  const { id } = req.params;
 
-  const trip = await getTrip(id);
-  console.log(trip);
+export async function createTripController(req, res, next) {
+if (!req.user?.id){
+  return next(new createHttpError.BadRequest('Trip not found:('));
+};
 
-  if (trip === null) {
-    return next(new createHttpError.NotFound('Trip not found:('));
-  }
 
-  res.json({
-    status: 200,
-    message: 'Trip received successfully',
-    data: trip,
-  });
-}
-
-export async function createTripController(req, res) {
   const trip = {
     name: req.body.name,
     date: req.body.date,
@@ -113,6 +78,8 @@ export async function createTripController(req, res) {
     product: req.body.product,
     driverId: req.user.id,
   };
+
+
   const result = await createTrip(trip);
 
   console.log(result);
@@ -124,11 +91,13 @@ export async function createTripController(req, res) {
 export async function deleteTripController(req, res, next) {
   const { id } = req.params;
 
-  const result = await deleteTrip(id);
+  const trip = await getTrip(id);
 
-  if (result === null) {
-    return next(new createHttpError.NotFound('Trip not found:('));
+  if (trip === null || trip.driverId.toString() !== req.user.id.toString()) {
+    return next(new createHttpError.NotFound('Trip not found :('));
   }
+
+  const result = await deleteTrip(id);
 
   res.json({
     status: 200,
@@ -136,9 +105,14 @@ export async function deleteTripController(req, res, next) {
     data: result,
   });
 }
-
 export async function updateTripController(req, res, next) {
   const { id } = req.params;
+
+  const existingTrip = await getTrip(id);
+
+  if (existingTrip === null || existingTrip.driverId.toString() !== req.user.id.toString()) {
+    return next(new createHttpError.NotFound('Trip not found :('));
+  }
 
   const trip = {
     name: req.body.name,
@@ -150,14 +124,12 @@ export async function updateTripController(req, res, next) {
     weigth: req.body.weigth,
     product: req.body.product,
   };
+
   const result = await updateTrip(id, trip);
 
-  if (result === null) {
-    return next(new createHttpError.NotFound('Trip not found:('));
-  }
-
-  console.log(result);
-  res
-    .status(201)
-    .json({ status: 201, message: 'Student updated!', data: result });
+  res.status(201).json({
+    status: 201,
+    message: 'Trip updated successfully',
+    data: result,
+  });
 }

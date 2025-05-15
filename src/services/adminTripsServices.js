@@ -8,6 +8,7 @@ export async function getTrips({
   startDate,
   endDate,
   driverId,
+  truckTrip,
 }) {
   const skip = page > 0 ? (page - 1) * perPage : 0;
 
@@ -25,9 +26,12 @@ export async function getTrips({
     }
   }
 
-
   if (driverId) {
     query.driverId = driverId;
+  }
+
+  if (truckTrip) {
+    query.truckTrip = { $regex: truckTrip, $options: 'i' };
   }
 
   const tripQuery = Trip.find(query);

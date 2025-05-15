@@ -9,6 +9,18 @@ export async function getTrips({
   endDate,
   driverId,
 }) {
+
+   if (!driverId) {
+
+    return {
+      trips: [],
+      page,
+      perPage,
+      totalItems: 0,
+      hasNextPage: false,
+      hasPreviousPage: false,
+    };
+  }
   const skip = page > 0 ? (page - 1) * perPage : 0;
 
   const query = {};
@@ -25,7 +37,6 @@ export async function getTrips({
     }
   }
 
-// console.log(driverId);
 
 
   if (driverId) {
