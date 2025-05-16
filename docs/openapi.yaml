@@ -7,6 +7,8 @@ info:
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   description: This is a documentation of Logistic-App
 tags:
+  - name: Auth
+    description: Auth operations.
   - name: Users trips
     description: Operations about trips by user.
   - name: Admins trips
@@ -15,7 +17,7 @@ tags:
     description: User operations.
 servers:
   - url: http://localhost:8080
-  - url: https://final-project-mobileteam-backend.onrender.com
+  - url: https://logistic-app-wchv.onrender.com
 paths:
   /user/register:
     post:
