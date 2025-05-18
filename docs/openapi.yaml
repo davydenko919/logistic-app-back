@@ -11,7 +11,7 @@ tags:
     description: Auth operations.
   - name: Users trips
     description: Operations about trips by user.
-  - name: Admins trips
+  - name: AdminTrips
     description: Operations about trips by admin.
   - name: User
     description: User operations.
@@ -19,27 +19,24 @@ servers:
   - url: http://localhost:8080
   - url: https://logistic-app-wchv.onrender.com
 paths:
-  /user/register:
+  /auth/register:
     post:
-      $ref: ../swagger/paths/user/postRegister.yaml
-  /user/login:
+      $ref: ../swagger/paths/auth/postRegister.yaml
+  /auth/login:
     post:
-      $ref: ../swagger/paths/user/postLogin.yaml
-  /user/info:
+      $ref: ../swagger/paths/auth/postLogin.yaml
+  /auth/info:
     get:
-      $ref: ../swagger/paths/user/getInfo.yaml
-  /user:
-    patch:
-      $ref: ../swagger/paths/user/patchUser.yaml
-  /user/logout:
+      $ref: ../swagger/paths/auth/getInfo.yaml
+  # /auth:
+  #   patch:
+  #     $ref: ../swagger/paths/auth/patchUser.yaml
+  /auth/logout:
     post:
-      $ref: ../swagger/paths/user/postLogout.yaml
-  # /user/logout2point0:
-  #   post:
-  #     $ref: ../swagger/paths/user/postlogout2point0.yaml
-  /user/refresh:
+      $ref: ../swagger/paths/auth/postLogout.yaml
+  /auth/refresh:
     post:
-      $ref: ../swagger/paths/user/postRefresh.yaml
+      $ref: ../swagger/paths/auth/postRefresh.yaml
   /user/participants:
     get:
       $ref: ../swagger/paths/user/getNumberOfUsers.yaml
