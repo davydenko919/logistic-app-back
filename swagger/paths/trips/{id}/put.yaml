@@ -1,0 +1,69 @@
+tags:
+  - Trips
+summary: Update a trip by ID
+operationId: updateTripController
+security:
+  - bearerAuth: []
+parameters:
+  - name: id
+    in: path
+    required: true
+    schema:
+      type: string
+    example: "682b5210bf90a7c8c77d8961"
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          date:
+            type: string
+            format: date-time
+            example: "2024-12-04T12:12:12"
+          truckTrip:
+            type: string
+            example: "Cherkassy-Lviv"
+          startTrip:
+            type: string
+            example: "12341234"
+          endTrip:
+            type: string
+            example: "12344567"
+          lengthTrip:
+            type: string
+            example: "1234"
+          weigth:
+            type: string
+            example: "20"
+          product:
+            type: string
+            example: "bread"
+          driverId:
+            type: string
+            example: "6825b5e3a6103bdd9d46d627"
+responses:
+  '201':
+    description: Trip updated successfully
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 201
+            message:
+              type: string
+              example: "Trip updated successfully"
+            data:
+              $ref: ../../../components/schemas/Trip.yaml
+  '404':
+    $ref: '../../../components/responses/404.yaml'
+  '401':
+    $ref: '../../../components/responses/401.yaml'

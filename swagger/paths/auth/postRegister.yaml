@@ -1,5 +1,5 @@
 tags:
-  - User
+  - Auth
 summary: Register user
 operationId: registerController
 description: 'Register a new user by providing email and password. The email must be unique, and the password will be securely hashed before storing in the database.'
@@ -11,12 +11,17 @@ requestBody:
         type: object
         required:
           - email
+          - name
           - password
         properties:
           email:
             description: "User's email address"
             type: string
             example: 'jane.doe@example.com'
+          name:
+            description: "User's real name"
+            type: string
+            example: 'Давиденко Кірілл Сергійович'
           password:
             description: "User's password"
             type: string
@@ -45,12 +50,8 @@ responses:
                 - _id
                 - name
                 - email
-                - gender
                 - createdAt
                 - updatedAt
-                - sportHours
-                - weight
-                - photo
               properties:
                 _id:
                   type: string
@@ -62,12 +63,6 @@ responses:
                   type: string
                   format: email
                   example: 'user@gmail.com'
-                gender:
-                  type: string
-                  enum:
-                    - man
-                    - woman
-                  example: 'man'
                 createdAt:
                   type: string
                   format: date-time
@@ -76,23 +71,5 @@ responses:
                   type: string
                   format: date-time
                   example: '2024-11-26T17:06:35.823Z'
-                sportHours:
-                  type: integer
-                  example: 31
-                  description: 'Total hours spent on sports activities.'
-                weight:
-                  type: number
-                  format: float
-                  example: 13
-                  description: 'User weight in kilograms.'
-                waterNorm:
-                  type: number
-                  example: 1500
-                  description: 'Users water norm in ml.'
-                photo:
-                  type: string
-                  format: uri
-                  example: 'https://res.cloudinary.com/dnepourus/image/upload/v1732640796/ffzgnlx8rznuauv2etlj.jpg'
-                  description: 'URL of the user profile photo.'
   '409':
     $ref: '../../components/responses/409.yaml'

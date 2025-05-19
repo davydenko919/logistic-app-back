@@ -1,0 +1,47 @@
+type: object
+required:
+  - date
+  - truckTrip
+  - startTrip
+  - endTrip
+  - lengthTrip
+  - weigth
+  - product
+  - driverId
+properties:
+  _id:
+    type: string
+    example: "6825bc2deb1788f02e59f9e5"
+  date:
+    type: string
+    format: date-time
+    example: "2026-12-04T12:12:12"
+  truckTrip:
+    type: string
+    example: "879987"
+  startTrip:
+    type: string
+    example: "12341234"
+  endTrip:
+    type: string
+    example: "12344567"
+  lengthTrip:
+    type: string
+    example: "1234"
+  weigth:
+    type: string
+    example: "20"
+  product:
+    type: string
+    example: "bread"
+  driverId:
+    type: string
+    example: "6825b5e3a6103bdd9d46d627"
+  createdAt:
+    type: string
+    format: date-time
+    example: "2025-05-15T10:04:29.812Z"
+  updatedAt:
+    type: string
+    format: date-time
+    example: "2025-05-15T10:04:29.812Z"

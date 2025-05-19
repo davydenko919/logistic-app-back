@@ -1,0 +1,56 @@
+tags:
+  - Users
+summary: Get all users
+operationId: getUsersController
+description: 'Get array of users'
+security: []
+responses:
+  '200':
+    description: Successfully returned an array of users
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: "Here is the array of users"
+            data:
+              type: array
+              items:
+                type: object
+                required:
+                  - _id
+                  - name
+                  - email
+                  - createdAt
+                  - updatedAt
+                properties:
+                  _id:
+                    type: string
+                    example: "6821c8c4a3fb79bf4866794a"
+                  name:
+                    type: string
+                    example: "John"
+                  email:
+                    type: string
+                    example: "John@gmail.com"
+                  createdAt:
+                    type: string
+                    format: date-time
+                    example: "2025-05-12T10:09:08.278Z"
+                  updatedAt:
+                    type: string
+                    format: date-time
+                    example: "2025-05-12T10:09:08.278Z"
+  '404':
+    $ref: '../../components/responses/404.yaml'
+  '500':
+    $ref: '../../components/responses/500.yaml'

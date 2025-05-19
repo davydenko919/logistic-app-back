@@ -9,7 +9,7 @@ info:
 tags:
   - name: Auth
     description: Auth operations.
-  - name: Users trips
+  - name: Trips
     description: Operations about trips by user.
   - name: AdminTrips
     description: Operations about trips by admin.
@@ -25,9 +25,9 @@ paths:
   /auth/login:
     post:
       $ref: ../swagger/paths/auth/postLogin.yaml
-  /auth/info:
-    get:
-      $ref: ../swagger/paths/auth/getInfo.yaml
+  # /auth/info:
+  #   get:
+  #     $ref: ../swagger/paths/auth/getInfo.yaml
   # /auth:
   #   patch:
   #     $ref: ../swagger/paths/auth/patchUser.yaml
@@ -37,23 +37,33 @@ paths:
   /auth/refresh:
     post:
       $ref: ../swagger/paths/auth/postRefresh.yaml
-  /user/participants:
+  /users:
     get:
-      $ref: ../swagger/paths/user/getNumberOfUsers.yaml
-  /water:
+      $ref: ../swagger/paths/user/getAllUsers.yaml
+  /trips:
     post:
-      $ref: ../swagger/paths/water/post.yaml
-  /water/{id}:
-    patch:
-      $ref: ../swagger/paths/water/{id}/patch.yaml
+      $ref: ../swagger/paths/trips/postTrip.yaml
+    get:
+      $ref: ../swagger/paths/trips/getTrips.yaml
+  /trips/{id}:
+    get:
+      $ref: ../swagger/paths/trips/{id}/get.yaml
     delete:
-      $ref: ../swagger/paths/water/{id}/delete.yaml
-  /water/day/{date}:
+      $ref: ../swagger/paths/trips/{id}/delete.yaml
+    put:
+      $ref: ../swagger/paths/trips/{id}/put.yaml
+  /admintrips:
+    post:
+      $ref: ../swagger/paths/admintrips/postTrip.yaml
     get:
-      $ref: ../swagger/paths/water/day/get.yaml
-  /water/month/{date}:
+      $ref: ../swagger/paths/admintrips/getTrips.yaml
+  /admintrips/{id}:
     get:
-      $ref: ../swagger/paths/water/month/get.yaml
+      $ref: ../swagger/paths/admintrips/{id}/get.yaml
+    delete:
+      $ref: ../swagger/paths/admintrips/{id}/delete.yaml
+    # put:
+    #   $ref: ../swagger/paths/admintrips/{id}/put.yaml
 components:
   securitySchemes:
     bearerAuth:

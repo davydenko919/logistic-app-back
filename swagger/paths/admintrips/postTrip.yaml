@@ -1,0 +1,103 @@
+# tags:
+#   - Admintrips
+# summary: Create a new trip
+# operationId: createTripController
+# security:
+#   - bearerAuth: []
+# requestBody:
+#   required: true
+#   content:
+#     application/json:
+#       schema:
+#         type: object
+#         required:
+#           - date
+#           - truckTrip
+#           - startTrip
+#           - endTrip
+#           - lengthTrip
+#           - weigth
+#           - product
+#         properties:
+#           date:
+#             type: string
+#             format: date-time
+#             example: "2026-12-04T12:12:12"
+#           truckTrip:
+#             type: string
+#             example: "879987"
+#           startTrip:
+#             type: string
+#             example: "12341234"
+#           endTrip:
+#             type: string
+#             example: "12344567"
+#           lengthTrip:
+#             type: string
+#             example: "1234"
+#           weigth:
+#             type: string
+#             example: "20"
+#           product:
+#             type: string
+#             example: "bread"
+# responses:
+#   '201':
+#     description: Trip successfully created
+#     content:
+#       application/json:
+#         schema:
+#           type: object
+#           required:
+#             - status
+#             - message
+#             - data
+#           properties:
+#             status:
+#               type: integer
+#               example: 201
+#             message:
+#               type: string
+#               example: "Trip successfully created"
+#             data:
+#               type: object
+#               properties:
+#                 _id:
+#                   type: string
+#                   example: "66499c6c985b9e5af4948d32"
+#                 date:
+#                   type: string
+#                   format: date-time
+#                   example: "2026-12-04T12:12:12"
+#                 truckTrip:
+#                   type: string
+#                   example: "879987"
+#                 startTrip:
+#                   type: string
+#                   example: "12341234"
+#                 endTrip:
+#                   type: string
+#                   example: "12344567"
+#                 lengthTrip:
+#                   type: string
+#                   example: "1234"
+#                 weigth:
+#                   type: string
+#                   example: "20"
+#                 product:
+#                   type: string
+#                   example: "bread"
+#                 createdAt:
+#                   type: string
+#                   format: date-time
+#                   example: "2025-05-19T15:49:49.558Z"
+#                 updatedAt:
+#                   type: string
+#                   format: date-time
+#                   example: "2025-05-19T15:49:49.558Z"
+#   '400':
+#     $ref: '../../components/responses/400.yaml'
+#   '500':
+#     $ref: '../../components/responses/500.yaml'
+#   '401':
+#     $ref: '../../components/responses/401.yaml'

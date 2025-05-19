@@ -1,0 +1,33 @@
+tags:
+  - Admintrips
+summary: Get a specific trip by ID
+operationId: getAdminTripController
+security:
+  - bearerAuth: []
+parameters:
+  - name: id
+    in: path
+    required: true
+    schema:
+      type: string
+    example: "6825bc2deb1788f02e59f9e5"
+responses:
+  '200':
+    description: Trip successfully received
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: "Trip received successfully"
+            data:
+              $ref: ../../../components/schemas/Trip.yaml
+  '404':
+    $ref: '../../../components/responses/404.yaml'
+  '401':
+    $ref: '../../../components/responses/401.yaml'
