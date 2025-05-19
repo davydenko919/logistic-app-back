@@ -1,5 +1,5 @@
 tags:
-  - Admintrips
+  - AdminTrips
 summary: Get list of trips with filters and pagination
 operationId: getAdminTripsController
 security:

@@ -1,5 +1,5 @@
 tags:
-  - Admintrips
+  - AdminTrips
 summary: Delete a trip by ID
 operationId: deleteAdminTripController
 security:

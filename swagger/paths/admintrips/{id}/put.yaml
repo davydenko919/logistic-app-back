@@ -1,5 +1,5 @@
 tags:
-  - Admintrips
+  - AdminTrips
 summary: Update a trip by ID
 operationId: updateAdminTripController
 security:
