@@ -16,7 +16,7 @@ tags:
   - name: User
     description: User operations.
 servers:
-  - url: http://localhost:8080
+  - url: http://127.0.0.1:8080
   - url: https://logistic-app-wchv.onrender.com
 paths:
   /auth/register:
@@ -53,8 +53,8 @@ paths:
     put:
       $ref: ../swagger/paths/trips/{id}/put.yaml
   /admintrips:
-    post:
-      $ref: ../swagger/paths/admintrips/postTrip.yaml
+    # post:
+    #   $ref: ../swagger/paths/admintrips/postTrip.yaml
     get:
       $ref: ../swagger/paths/admintrips/getTrips.yaml
   /admintrips/{id}:
@@ -62,8 +62,8 @@ paths:
       $ref: ../swagger/paths/admintrips/{id}/get.yaml
     delete:
       $ref: ../swagger/paths/admintrips/{id}/delete.yaml
-    # put:
-    #   $ref: ../swagger/paths/admintrips/{id}/put.yaml
+    put:
+      $ref: ../swagger/paths/admintrips/{id}/put.yaml
 components:
   securitySchemes:
     bearerAuth:
