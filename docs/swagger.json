@@ -309,7 +309,7 @@
     "/users": {
       "get": {
         "tags": [
-          "Users"
+          "User"
         ],
         "summary": "Get all users",
         "operationId": "getUsersController",
@@ -924,7 +924,7 @@
     "/admintrips": {
       "get": {
         "tags": [
-          "Admintrips"
+          "AdminTrips"
         ],
         "summary": "Get list of trips with filters and pagination",
         "operationId": "getAdminTripsController",
@@ -1093,7 +1093,7 @@
     "/admintrips/{id}": {
       "get": {
         "tags": [
-          "Admintrips"
+          "AdminTrips"
         ],
         "summary": "Get a specific trip by ID",
         "operationId": "getAdminTripController",
@@ -1147,7 +1147,7 @@
       },
       "delete": {
         "tags": [
-          "Admintrips"
+          "AdminTrips"
         ],
         "summary": "Delete a trip by ID",
         "operationId": "deleteAdminTripController",
@@ -1206,7 +1206,7 @@
       },
       "put": {
         "tags": [
-          "Admintrips"
+          "AdminTrips"
         ],
         "summary": "Update a trip by ID",
         "operationId": "updateAdminTripController",
