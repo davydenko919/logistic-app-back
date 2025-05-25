@@ -1,5 +1,5 @@
 import express from 'express';
-
+import pino from 'pino-http';
 import tripRoutes from './routes/tripsRoutes.js';
 import adminTrips from './routes/adminTrips.js';
 import usersRoutes from './routes/usersRoutes.js';
@@ -14,6 +14,13 @@ import { swaggerDocs } from './middlewares/swaggerDocs.js';
 const app = express();
 
 app.use(cors());
+app.use(
+    pino({
+      transport: {
+        target: 'pino-pretty',
+      },
+    }),
+  );
 
 app.use('/api-docs', swaggerDocs());
 app.use(cookieParser());

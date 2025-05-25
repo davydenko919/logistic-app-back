@@ -8,10 +8,9 @@ export async function getTrips({
   startDate,
   endDate,
   driverId,
+  truckTrip,
 }) {
-
-   if (!driverId) {
-
+  if (!driverId) {
     return {
       trips: [],
       page,
@@ -37,12 +36,13 @@ export async function getTrips({
     }
   }
 
-
-
   if (driverId) {
     query.driverId = driverId;
   }
 
+  if (truckTrip) {
+    query.truckTrip = { $regex: truckTrip, $options: 'i' };
+  }
   const tripQuery = Trip.find(query);
 
   const [total, trips] = await Promise.all([

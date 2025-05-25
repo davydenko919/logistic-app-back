@@ -6,7 +6,7 @@ import {
   createTrip,
   deleteTrip,
   updateTrip,
-} from '../services/adminTripsServices.js';
+} from '../services/tripsServices.js';
 
 import { parsePaginationParams } from '../utils/parsePaginationParams.js';
 import { parseSortParams } from '../utils/parseSortParams.js';
@@ -15,7 +15,7 @@ export async function getTripsController(req, res) {
   const { page, perPage } = parsePaginationParams(req.query);
   const { sortBy, sortOrder } = parseSortParams(req.query);
 
-  const { startDate, endDate } = req.query;
+  const { startDate, endDate, truckTrip, } = req.query;
 
   const trips = await getTrips({
     page,
@@ -25,6 +25,7 @@ export async function getTripsController(req, res) {
     startDate,
     endDate,
     driverId: req.user.id,
+    truckTrip,
   });
 
   res.json({
