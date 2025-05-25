@@ -20,7 +20,7 @@ export async function registerController(req, res) {
 export async function loginController(req, res) {
   const { email, password } = req.body;
 
-  const session = await loginUser(email, password);
+  const {session, user} = await loginUser(email, password);
 
   res.cookie('refreshToken', session.refreshToken, {
     httpOnly: true,
@@ -36,6 +36,8 @@ export async function loginController(req, res) {
     status: 200,
     message: 'Login completed',
     data: {
+      name: user.name,
+      email: user.email,
       accessToken: session.accessToken,
     },
   });
