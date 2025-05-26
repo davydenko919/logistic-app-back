@@ -7,3 +7,11 @@ export async function getUsers() {
     users,
   };
 }
+
+export function getUser(id) {
+  return User.findById(id);
+}
+
+export function updateUser(userId, user) {
+  return User.findByIdAndUpdate(userId, user);
+}
