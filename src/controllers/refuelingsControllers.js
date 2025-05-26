@@ -14,7 +14,7 @@ export async function getRefuelingsController(req, res) {
   const { sortBy, sortOrder } = parseSortParams(req.query);
   const { startDate, endDate, truck } = req.query;
 
-  const refuelings = await getRefuelings({
+  const refuelings = await getRefuelingsController({
     page,
     perPage,
     sortBy,

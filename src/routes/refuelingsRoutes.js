@@ -9,9 +9,9 @@ import {putRefuelingSchema} from "../validation/refueling.js";
 import {
     getRefuelingsController,
     getRefuelingController,
-    createRefuelingsController,
-    deleteRefuelingsController,
-    updateRefuelingsController,
+    createRefuelingController,
+    deleteRefuelingController,
+    updateRefuelingController,
 } from '../controllers/refuelingsControllers.js';
 
 const router = express.Router();
@@ -21,10 +21,10 @@ router.get('/', ctrlWrapper(getRefuelingsController));
 
 router.get('/:id', isValidID, ctrlWrapper(getRefuelingController));
 
-router.post('/', jsonParser, validateBody(refuelingSchema), ctrlWrapper(createRefuelingsController));
+router.post('/', jsonParser, validateBody(refuelingSchema), ctrlWrapper(createRefuelingController));
 
-router.delete('/:id', isValidID, ctrlWrapper(deleteRefuelingsController));
+router.delete('/:id', isValidID, ctrlWrapper(deleteRefuelingController));
 
-router.put('/:id', isValidID, jsonParser, validateBody(putRefuelingSchema), ctrlWrapper(updateRefuelingsController));
+router.put('/:id', isValidID, jsonParser, validateBody(putRefuelingSchema), ctrlWrapper(updateRefuelingController));
 
 export default router;
