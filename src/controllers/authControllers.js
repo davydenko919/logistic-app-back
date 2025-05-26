@@ -38,7 +38,9 @@ export async function loginController(req, res) {
     data: {
       name: user.name,
       email: user.email,
+      _id: user._id,
       accessToken: session.accessToken,
+
     },
   });
 }

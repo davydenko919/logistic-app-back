@@ -49,6 +49,7 @@ export async function loginUser(email, password) {
     user: {
       name: user.name,
       email: user.email,
+      _id: user._id,
     },
   };
 }
