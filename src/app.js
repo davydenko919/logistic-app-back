@@ -3,6 +3,7 @@ import pino from 'pino-http';
 import tripRoutes from './routes/tripsRoutes.js';
 import adminTrips from './routes/adminTrips.js';
 import usersRoutes from './routes/usersRoutes.js';
+import carsRoutes from './routes/carsRoutes.js';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import { errorHandler } from './middlewares/errorHandler.js';
@@ -30,7 +31,8 @@ app.use(cookieParser());
 app.use('/auth', authRoutes);
 app.use('/trips', auth, tripRoutes);
 app.use('/admintrips', auth, adminTrips);
-app.use('/users', usersRoutes);
+app.use('/users', auth, usersRoutes);
+app.use('/cars', auth, carsRoutes);
 
 app.use(notFoundHandler);
 app.use(errorHandler);
